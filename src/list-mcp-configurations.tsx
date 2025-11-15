@@ -74,10 +74,6 @@ async function openInCursor(client: MCPClientWithPath) {
     const expandedPath = ensureConfiguredPath(client);
     await execAsync(`open -a "Cursor" "${expandedPath}"`);
     await closeMainWindow({ clearRootSearch: true });
-    await showToast({
-      style: Toast.Style.Success,
-      title: "Opened in Cursor",
-    });
   } catch (error) {
     await showToast({
       style: Toast.Style.Failure,
@@ -92,10 +88,6 @@ async function openInVSCode(client: MCPClientWithPath) {
     const expandedPath = ensureConfiguredPath(client);
     await execAsync(`open -a "Visual Studio Code" "${expandedPath}"`);
     await closeMainWindow({ clearRootSearch: true });
-    await showToast({
-      style: Toast.Style.Success,
-      title: "Opened in VS Code",
-    });
   } catch (error) {
     await showToast({
       style: Toast.Style.Failure,
@@ -110,10 +102,6 @@ async function openInZed(client: MCPClientWithPath) {
     const expandedPath = ensureConfiguredPath(client);
     await execAsync(`open -a "Zed" "${expandedPath}"`);
     await closeMainWindow({ clearRootSearch: true });
-    await showToast({
-      style: Toast.Style.Success,
-      title: "Opened in Zed",
-    });
   } catch (error) {
     await showToast({
       style: Toast.Style.Failure,
@@ -128,10 +116,6 @@ async function openInSublime(client: MCPClientWithPath) {
     const expandedPath = ensureConfiguredPath(client);
     await execAsync(`open -a "Sublime Text" "${expandedPath}"`);
     await closeMainWindow({ clearRootSearch: true });
-    await showToast({
-      style: Toast.Style.Success,
-      title: "Opened in Sublime Text",
-    });
   } catch (error) {
     await showToast({
       style: Toast.Style.Failure,
