@@ -15,36 +15,40 @@ interface MCPClient {
 
 const MCP_CLIENTS: MCPClient[] = [
   { id: "amp", name: "Amp", defaultPath: "~/placeholder-amp.json", icon: Icon.Code },
-  { id: "claude-code", name: "Claude Code", defaultPath: "~/placeholder-claude-code.json", icon: Icon.Code },
+  {
+    id: "claude-code",
+    name: "Claude Code",
+    defaultPath: "~/Library/Application Support/Claude/claude_desktop_config.json",
+    icon: Icon.Code,
+  },
   { id: "cline", name: "Cline", defaultPath: "~/placeholder-cline.json", icon: Icon.Code },
   { id: "codex", name: "Codex", defaultPath: "~/placeholder-codex.json", icon: Icon.Code },
-  { id: "copilot-cli", name: "Copilot CLI", defaultPath: "~/placeholder-copilot-cli.json", icon: Icon.Terminal },
+  {
+    id: "copilot-cli",
+    name: "Copilot CLI",
+    defaultPath: "~/Library/Application Support/Code - Insiders/User/mcp.json",
+    icon: Icon.Terminal,
+  },
   {
     id: "copilot-vscode",
     name: "Copilot / VS Code",
-    defaultPath: "~/placeholder-copilot-vscode.json",
+    defaultPath: "~/Library/Application Support/Code/User/mcp.json",
     icon: Icon.Code,
   },
   { id: "cursor", name: "Cursor", defaultPath: "~/.cursor/mcp.json", icon: Icon.Code },
   { id: "factory-cli", name: "Factory CLI", defaultPath: "~/placeholder-factory-cli.json", icon: Icon.Terminal },
   { id: "gemini-cli", name: "Gemini CLI", defaultPath: "~/placeholder-gemini-cli.json", icon: Icon.Terminal },
   {
-    id: "gemini-code-assist",
-    name: "Gemini Code Assist",
-    defaultPath: "~/placeholder-gemini-code-assist.json",
-    icon: Icon.Code,
-  },
-  {
     id: "jetbrains",
     name: "JetBrains AI Assistant & Junie",
-    defaultPath: "~/placeholder-jetbrains.json",
+    defaultPath: "~/Library/Application Support/JetBrains/IntelliJIdea2025.2/options/llm.mcpServers.xml",
     icon: Icon.Code,
   },
   { id: "kiro", name: "Kiro", defaultPath: "~/placeholder-kiro.json", icon: Icon.Code },
   { id: "qoder", name: "Qoder", defaultPath: "~/placeholder-qoder.json", icon: Icon.Code },
-  { id: "visual-studio", name: "Visual Studio", defaultPath: "~/placeholder-visual-studio.json", icon: Icon.Code },
-  { id: "warp", name: "Warp", defaultPath: "~/placeholder-warp.json", icon: Icon.Terminal },
-  { id: "windsurf", name: "Windsurf", defaultPath: "~/placeholder-windsurf.json", icon: Icon.Code },
+  { id: "visual-studio", name: "Visual Studio", defaultPath: "~/.mcp.json", icon: Icon.Code },
+  { id: "warp", name: "Warp", defaultPath: "~/Library/Application Support/dev.warp.Warp-Stable/mcp", icon: Icon.Terminal },
+  { id: "windsurf", name: "Windsurf", defaultPath: "~/.codeium/windsurf/mcp_config.json", icon: Icon.Code },
 ];
 
 function expandPath(filePath: string): string {
