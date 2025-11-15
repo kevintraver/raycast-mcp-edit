@@ -3,7 +3,7 @@
   "name": "mcp-edit",
   "title": "MCP Edit",
   "description": "Quickly edit MCP configuration files",
-  "icon": "extension-icon.png",
+  "icon": "icon.png",
   "author": "kevintraver",
   "platforms": [
     "macOS",
