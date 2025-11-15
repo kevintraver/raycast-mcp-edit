@@ -221,7 +221,7 @@ export default function Command() {
                   <Action
                     title="Set Config Path…"
                     icon={Icon.Gear}
-                    shortcut={{ modifiers: ["cmd"], key: "p" }}
+                    shortcut={{ modifiers: ["cmd", "shift"], key: "p" }}
                     onAction={() => openCommandPreferences()}
                   />
                 )}
