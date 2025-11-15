@@ -328,24 +328,6 @@
           "default": "~/.mcp.json"
         },
         {
-          "name": "showWarp",
-          "type": "checkbox",
-          "required": false,
-          "title": "Show Warp",
-          "label": "Show Warp",
-          "description": "Include Warp in the MCP list",
-          "default": true
-        },
-        {
-          "name": "warpPath",
-          "type": "textfield",
-          "required": false,
-          "title": "Warp Config Path",
-          "label": "Warp Config Path",
-          "description": "Absolute path to the Warp MCP configuration file",
-          "default": "~/Library/Application Support/dev.warp.Warp-Stable/mcp"
-        },
-        {
           "name": "showWindsurf",
           "type": "checkbox",
           "required": false,

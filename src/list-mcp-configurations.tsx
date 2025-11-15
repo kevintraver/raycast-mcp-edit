@@ -42,7 +42,6 @@ const MCP_CLIENTS: MCPClient[] = [
   { id: "kiro", name: "Kiro", icon: Icon.Code },
   { id: "qoder", name: "Qoder", icon: Icon.Code },
   { id: "visual-studio", name: "Visual Studio", icon: Icon.Code },
-  { id: "warp", name: "Warp", icon: Icon.Terminal },
   { id: "windsurf", name: "Windsurf", icon: Icon.Code },
 ];
 
