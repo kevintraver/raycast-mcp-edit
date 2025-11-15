@@ -22,6 +22,42 @@
       "mode": "view",
       "preferences": [
         {
+          "name": "showCursorAction",
+          "type": "checkbox",
+          "required": false,
+          "title": "Enable Open in Cursor",
+          "label": "Enable Open in Cursor",
+          "description": "Show the Cursor editor action in the list",
+          "default": true
+        },
+        {
+          "name": "showVsCodeAction",
+          "type": "checkbox",
+          "required": false,
+          "title": "Enable Open in VS Code",
+          "label": "Enable Open in VS Code",
+          "description": "Show the VS Code editor action in the list",
+          "default": true
+        },
+        {
+          "name": "showZedAction",
+          "type": "checkbox",
+          "required": false,
+          "title": "Enable Open in Zed",
+          "label": "Enable Open in Zed",
+          "description": "Show the Zed editor action in the list",
+          "default": true
+        },
+        {
+          "name": "showSublimeAction",
+          "type": "checkbox",
+          "required": false,
+          "title": "Enable Open in Sublime Text",
+          "label": "Enable Open in Sublime Text",
+          "description": "Show the Sublime Text editor action in the list",
+          "default": true
+        },
+        {
           "name": "showAmp",
           "type": "checkbox",
           "required": false,
@@ -37,7 +73,7 @@
           "title": "Amp Config Path",
           "label": "Amp Config Path",
           "description": "Absolute path to the Amp MCP configuration file",
-          "default": "~/placeholder-amp.json"
+          "default": "~/.config/amp/settings.json"
         },
         {
           "name": "showClaudeCode",
@@ -55,7 +91,25 @@
           "title": "Claude Code Config Path",
           "label": "Claude Code Config Path",
           "description": "Absolute path to the Claude Code MCP configuration file",
-          "default": "~/placeholder-claude-code.json"
+          "default": "~/.claude.json"
+        },
+        {
+          "name": "showClaudeDesktopApp",
+          "type": "checkbox",
+          "required": false,
+          "title": "Show Claude Desktop app",
+          "label": "Show Claude Desktop app",
+          "description": "Include Claude Desktop app in the MCP list",
+          "default": true
+        },
+        {
+          "name": "claudeDesktopAppPath",
+          "type": "textfield",
+          "required": false,
+          "title": "Claude Desktop app Config Path",
+          "label": "Claude Desktop app Config Path",
+          "description": "Absolute path to the Claude Desktop app MCP configuration file",
+          "default": "~/Library/Application Support/Claude/claude_desktop_config.json"
         },
         {
           "name": "showCline",
@@ -73,7 +127,7 @@
           "title": "Cline Config Path",
           "label": "Cline Config Path",
           "description": "Absolute path to the Cline MCP configuration file",
-          "default": "~/placeholder-cline.json"
+          "default": "~/Library/Application Support/Code/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json"
         },
         {
           "name": "showCodex",
@@ -91,7 +145,7 @@
           "title": "Codex Config Path",
           "label": "Codex Config Path",
           "description": "Absolute path to the Codex MCP configuration file",
-          "default": "~/placeholder-codex.json"
+          "default": "~/.codex/config.toml"
         },
         {
           "name": "showCopilotCli",
@@ -109,7 +163,7 @@
           "title": "Copilot CLI Config Path",
           "label": "Copilot CLI Config Path",
           "description": "Absolute path to the Copilot CLI MCP configuration file",
-          "default": "~/placeholder-copilot-cli.json"
+          "default": "~/Library/Application Support/Code - Insiders/User/mcp.json"
         },
         {
           "name": "showCopilotVscode",
@@ -127,7 +181,7 @@
           "title": "Copilot / VS Code Config Path",
           "label": "Copilot / VS Code Config Path",
           "description": "Absolute path to the Copilot / VS Code MCP configuration file",
-          "default": "~/placeholder-copilot-vscode.json"
+          "default": "~/Library/Application Support/Code/User/mcp.json"
         },
         {
           "name": "showCursor",
@@ -163,7 +217,7 @@
           "title": "Factory CLI Config Path",
           "label": "Factory CLI Config Path",
           "description": "Absolute path to the Factory CLI MCP configuration file",
-          "default": "~/placeholder-factory-cli.json"
+          "default": ""
         },
         {
           "name": "showGeminiCli",
@@ -181,7 +235,7 @@
           "title": "Gemini CLI Config Path",
           "label": "Gemini CLI Config Path",
           "description": "Absolute path to the Gemini CLI MCP configuration file",
-          "default": "~/placeholder-gemini-cli.json"
+          "default": ""
         },
         {
           "name": "showGeminiCodeAssist",
@@ -199,7 +253,7 @@
           "title": "Gemini Code Assist Config Path",
           "label": "Gemini Code Assist Config Path",
           "description": "Absolute path to the Gemini Code Assist MCP configuration file",
-          "default": "~/placeholder-gemini-code-assist.json"
+          "default": ""
         },
         {
           "name": "showJetbrains",
@@ -217,7 +271,7 @@
           "title": "JetBrains AI Assistant & Junie Config Path",
           "label": "JetBrains AI Assistant & Junie Config Path",
           "description": "Absolute path to the JetBrains AI Assistant & Junie MCP configuration file",
-          "default": "~/placeholder-jetbrains.json"
+          "default": "~/Library/Application Support/JetBrains/IntelliJIdea2025.2/options/llm.mcpServers.xml"
         },
         {
           "name": "showKiro",
@@ -235,7 +289,7 @@
           "title": "Kiro Config Path",
           "label": "Kiro Config Path",
           "description": "Absolute path to the Kiro MCP configuration file",
-          "default": "~/placeholder-kiro.json"
+          "default": ""
         },
         {
           "name": "showQoder",
@@ -253,7 +307,7 @@
           "title": "Qoder Config Path",
           "label": "Qoder Config Path",
           "description": "Absolute path to the Qoder MCP configuration file",
-          "default": "~/placeholder-qoder.json"
+          "default": ""
         },
         {
           "name": "showVisualStudio",
@@ -271,7 +325,7 @@
           "title": "Visual Studio Config Path",
           "label": "Visual Studio Config Path",
           "description": "Absolute path to the Visual Studio MCP configuration file",
-          "default": "~/placeholder-visual-studio.json"
+          "default": "~/.mcp.json"
         },
         {
           "name": "showWarp",
@@ -289,7 +343,7 @@
           "title": "Warp Config Path",
           "label": "Warp Config Path",
           "description": "Absolute path to the Warp MCP configuration file",
-          "default": "~/placeholder-warp.json"
+          "default": "~/Library/Application Support/dev.warp.Warp-Stable/mcp"
         },
         {
           "name": "showWindsurf",
@@ -307,7 +361,7 @@
           "title": "Windsurf Config Path",
           "label": "Windsurf Config Path",
           "description": "Absolute path to the Windsurf MCP configuration file",
-          "default": "~/placeholder-windsurf.json"
+          "default": "~/.codeium/windsurf/mcp_config.json"
         }
       ]
     }

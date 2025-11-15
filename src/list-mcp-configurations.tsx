@@ -1,4 +1,14 @@
-import { ActionPanel, Action, Icon, List, getPreferenceValues, showToast, Toast, closeMainWindow } from "@raycast/api";
+import {
+  ActionPanel,
+  Action,
+  Icon,
+  List,
+  getPreferenceValues,
+  showToast,
+  Toast,
+  closeMainWindow,
+  openCommandPreferences,
+} from "@raycast/api";
 import { exec } from "child_process";
 import { promisify } from "util";
 import { homedir } from "os";
@@ -9,46 +19,31 @@ const execAsync = promisify(exec);
 interface MCPClient {
   id: string;
   name: string;
-  defaultPath: string;
   icon: Icon;
 }
 
+type MCPClientWithPath = MCPClient & {
+  filePath: string;
+  expandedPath?: string;
+};
+
 const MCP_CLIENTS: MCPClient[] = [
-  { id: "amp", name: "Amp", defaultPath: "~/placeholder-amp.json", icon: Icon.Code },
-  {
-    id: "claude-code",
-    name: "Claude Code",
-    defaultPath: "~/Library/Application Support/Claude/claude_desktop_config.json",
-    icon: Icon.Code,
-  },
-  { id: "cline", name: "Cline", defaultPath: "~/placeholder-cline.json", icon: Icon.Code },
-  { id: "codex", name: "Codex", defaultPath: "~/placeholder-codex.json", icon: Icon.Code },
-  {
-    id: "copilot-cli",
-    name: "Copilot CLI",
-    defaultPath: "~/Library/Application Support/Code - Insiders/User/mcp.json",
-    icon: Icon.Terminal,
-  },
-  {
-    id: "copilot-vscode",
-    name: "Copilot / VS Code",
-    defaultPath: "~/Library/Application Support/Code/User/mcp.json",
-    icon: Icon.Code,
-  },
-  { id: "cursor", name: "Cursor", defaultPath: "~/.cursor/mcp.json", icon: Icon.Code },
-  { id: "factory-cli", name: "Factory CLI", defaultPath: "~/placeholder-factory-cli.json", icon: Icon.Terminal },
-  { id: "gemini-cli", name: "Gemini CLI", defaultPath: "~/placeholder-gemini-cli.json", icon: Icon.Terminal },
-  {
-    id: "jetbrains",
-    name: "JetBrains AI Assistant & Junie",
-    defaultPath: "~/Library/Application Support/JetBrains/IntelliJIdea2025.2/options/llm.mcpServers.xml",
-    icon: Icon.Code,
-  },
-  { id: "kiro", name: "Kiro", defaultPath: "~/placeholder-kiro.json", icon: Icon.Code },
-  { id: "qoder", name: "Qoder", defaultPath: "~/placeholder-qoder.json", icon: Icon.Code },
-  { id: "visual-studio", name: "Visual Studio", defaultPath: "~/.mcp.json", icon: Icon.Code },
-  { id: "warp", name: "Warp", defaultPath: "~/Library/Application Support/dev.warp.Warp-Stable/mcp", icon: Icon.Terminal },
-  { id: "windsurf", name: "Windsurf", defaultPath: "~/.codeium/windsurf/mcp_config.json", icon: Icon.Code },
+  { id: "amp", name: "Amp", icon: Icon.Code },
+  { id: "claude-code", name: "Claude Code", icon: Icon.Code },
+  { id: "claude-desktop-app", name: "Claude Desktop app", icon: Icon.Code },
+  { id: "cline", name: "Cline", icon: Icon.Code },
+  { id: "codex", name: "Codex", icon: Icon.Code },
+  { id: "copilot-cli", name: "Copilot CLI", icon: Icon.Terminal },
+  { id: "copilot-vscode", name: "Copilot / VS Code", icon: Icon.Code },
+  { id: "cursor", name: "Cursor", icon: Icon.Code },
+  { id: "factory-cli", name: "Factory CLI", icon: Icon.Terminal },
+  { id: "gemini-cli", name: "Gemini CLI", icon: Icon.Terminal },
+  { id: "jetbrains", name: "JetBrains AI Assistant & Junie", icon: Icon.Code },
+  { id: "kiro", name: "Kiro", icon: Icon.Code },
+  { id: "qoder", name: "Qoder", icon: Icon.Code },
+  { id: "visual-studio", name: "Visual Studio", icon: Icon.Code },
+  { id: "warp", name: "Warp", icon: Icon.Terminal },
+  { id: "windsurf", name: "Windsurf", icon: Icon.Code },
 ];
 
 function expandPath(filePath: string): string {
@@ -74,9 +69,9 @@ function getPreferenceKey(clientId: string, suffix: string): string {
   return `${camelCaseId}${suffix}`;
 }
 
-async function openInCursor(filePath: string) {
+async function openInCursor(client: MCPClientWithPath) {
   try {
-    const expandedPath = expandPath(filePath);
+    const expandedPath = ensureConfiguredPath(client);
     await execAsync(`open -a "Cursor" "${expandedPath}"`);
     await closeMainWindow({ clearRootSearch: true });
     await showToast({
@@ -92,9 +87,9 @@ async function openInCursor(filePath: string) {
   }
 }
 
-async function openInVSCode(filePath: string) {
+async function openInVSCode(client: MCPClientWithPath) {
   try {
-    const expandedPath = expandPath(filePath);
+    const expandedPath = ensureConfiguredPath(client);
     await execAsync(`open -a "Visual Studio Code" "${expandedPath}"`);
     await closeMainWindow({ clearRootSearch: true });
     await showToast({
@@ -110,9 +105,9 @@ async function openInVSCode(filePath: string) {
   }
 }
 
-async function openInZed(filePath: string) {
+async function openInZed(client: MCPClientWithPath) {
   try {
-    const expandedPath = expandPath(filePath);
+    const expandedPath = ensureConfiguredPath(client);
     await execAsync(`open -a "Zed" "${expandedPath}"`);
     await closeMainWindow({ clearRootSearch: true });
     await showToast({
@@ -128,9 +123,9 @@ async function openInZed(filePath: string) {
   }
 }
 
-async function openInSublime(filePath: string) {
+async function openInSublime(client: MCPClientWithPath) {
   try {
-    const expandedPath = expandPath(filePath);
+    const expandedPath = ensureConfiguredPath(client);
     await execAsync(`open -a "Sublime Text" "${expandedPath}"`);
     await closeMainWindow({ clearRootSearch: true });
     await showToast({
@@ -146,8 +141,28 @@ async function openInSublime(filePath: string) {
   }
 }
 
+function ensureConfiguredPath(client: MCPClientWithPath): string {
+  if (!client.filePath) {
+    throw new Error(`Set the config path for ${client.name} in command preferences.`);
+  }
+
+  if (client.expandedPath) {
+    return client.expandedPath;
+  }
+
+  return expandPath(client.filePath);
+}
+
+interface Preferences {
+  [key: string]: boolean | string | undefined;
+  showCursorAction?: boolean;
+  showVsCodeAction?: boolean;
+  showZedAction?: boolean;
+  showSublimeAction?: boolean;
+}
+
 export default function Command() {
-  const preferences = getPreferenceValues<Record<string, boolean | string>>();
+  const preferences = getPreferenceValues<Preferences>();
 
   // Filter clients based on visibility preferences
   const visibleClients = MCP_CLIENTS.filter((client) => {
@@ -157,14 +172,15 @@ export default function Command() {
   });
 
   // Get file path for each client (from preferences or default)
-  const clientsWithPaths = visibleClients.map((client) => {
+  const clientsWithPaths: MCPClientWithPath[] = visibleClients.map((client) => {
     const pathKey = getPreferenceKey(client.id, "Path");
     const customPath = preferences[pathKey];
-    const filePath = typeof customPath === "string" && customPath ? customPath : client.defaultPath;
+    const filePath = typeof customPath === "string" ? customPath.trim() : "";
+    const expandedPath = filePath ? expandPath(filePath) : undefined;
     return {
       ...client,
       filePath,
-      expandedPath: expandPath(filePath),
+      expandedPath,
     };
   });
 
@@ -175,37 +191,56 @@ export default function Command() {
           key={client.id}
           icon={client.icon}
           title={client.name}
-          subtitle={client.filePath}
+          subtitle={client.filePath || "Set path in command preferences"}
           actions={
             <ActionPanel>
-              <Action title="Open in Cursor" icon={Icon.Code} onAction={() => openInCursor(client.filePath)} />
+              {preferences.showCursorAction !== false && (
+                <Action title="Open in Cursor" icon={Icon.Code} onAction={() => openInCursor(client)} />
+              )}
               <ActionPanel.Section title="Open in Editor">
-                <Action
-                  title="Open in VS Code"
-                  icon={Icon.Code}
-                  shortcut={{ modifiers: ["cmd"], key: "v" }}
-                  onAction={() => openInVSCode(client.filePath)}
-                />
-                <Action
-                  title="Open in Zed"
-                  icon={Icon.Code}
-                  shortcut={{ modifiers: ["cmd"], key: "z" }}
-                  onAction={() => openInZed(client.filePath)}
-                />
-                <Action
-                  title="Open in Sublime Text"
-                  icon={Icon.Code}
-                  shortcut={{ modifiers: ["cmd"], key: "s" }}
-                  onAction={() => openInSublime(client.filePath)}
-                />
+                {preferences.showVsCodeAction !== false && (
+                  <Action
+                    title="Open in VS Code"
+                    icon={Icon.Code}
+                    shortcut={{ modifiers: ["cmd"], key: "v" }}
+                    onAction={() => openInVSCode(client)}
+                  />
+                )}
+                {preferences.showZedAction !== false && (
+                  <Action
+                    title="Open in Zed"
+                    icon={Icon.Code}
+                    shortcut={{ modifiers: ["cmd"], key: "z" }}
+                    onAction={() => openInZed(client)}
+                  />
+                )}
+                {preferences.showSublimeAction !== false && (
+                  <Action
+                    title="Open in Sublime Text"
+                    icon={Icon.Code}
+                    shortcut={{ modifiers: ["cmd"], key: "s" }}
+                    onAction={() => openInSublime(client)}
+                  />
+                )}
               </ActionPanel.Section>
               <ActionPanel.Section title="File Actions">
-                <Action.CopyToClipboard
-                  title="Copy File Path"
-                  content={client.expandedPath}
-                  shortcut={{ modifiers: ["cmd"], key: "c" }}
-                />
-                <Action.ShowInFinder path={client.expandedPath} shortcut={{ modifiers: ["cmd"], key: "f" }} />
+                {client.expandedPath ? (
+                  <>
+                    <Action.CopyToClipboard
+                      title="Copy File Path"
+                      content={client.filePath}
+                      shortcut={{ modifiers: ["cmd"], key: "c" }}
+                    />
+                    <Action.ShowInFinder path={client.expandedPath} shortcut={{ modifiers: ["cmd"], key: "f" }} />
+                  </>
+                ) : (
+                  <Action
+                    title="Set Config Path…"
+                    icon={Icon.Gear}
+                    shortcut={{ modifiers: ["cmd"], key: "p" }}
+                    onAction={() => openCommandPreferences()}
+                  />
+                )}
               </ActionPanel.Section>
             </ActionPanel>
           }
