@@ -1,0 +1,335 @@
+{
+  "$schema": "https://www.raycast.com/schemas/extension.json",
+  "name": "mcp-edit",
+  "title": "MCP Edit",
+  "description": "Quickly edit MCP configuration files",
+  "icon": "extension-icon.png",
+  "author": "kevintraver",
+  "platforms": [
+    "macOS",
+    "Windows"
+  ],
+  "categories": [
+    "Developer Tools"
+  ],
+  "license": "MIT",
+  "commands": [
+    {
+      "name": "list-mcp-configurations",
+      "title": "Edit MCP Configurations",
+      "subtitle": "Edit MCP Configurations",
+      "description": "Browse and open predefined MCP client configuration files",
+      "mode": "view",
+      "preferences": [
+        {
+          "name": "showAmp",
+          "type": "checkbox",
+          "required": false,
+          "title": "Show Amp",
+          "label": "Show Amp",
+          "description": "Include Amp in the MCP list",
+          "default": true
+        },
+        {
+          "name": "ampPath",
+          "type": "textfield",
+          "required": false,
+          "title": "Amp Config Path",
+          "label": "Amp Config Path",
+          "description": "Absolute path to the Amp MCP configuration file",
+          "default": "~/placeholder-amp.json"
+        },
+        {
+          "name": "showClaudeCode",
+          "type": "checkbox",
+          "required": false,
+          "title": "Show Claude Code",
+          "label": "Show Claude Code",
+          "description": "Include Claude Code in the MCP list",
+          "default": true
+        },
+        {
+          "name": "claudeCodePath",
+          "type": "textfield",
+          "required": false,
+          "title": "Claude Code Config Path",
+          "label": "Claude Code Config Path",
+          "description": "Absolute path to the Claude Code MCP configuration file",
+          "default": "~/placeholder-claude-code.json"
+        },
+        {
+          "name": "showCline",
+          "type": "checkbox",
+          "required": false,
+          "title": "Show Cline",
+          "label": "Show Cline",
+          "description": "Include Cline in the MCP list",
+          "default": true
+        },
+        {
+          "name": "clinePath",
+          "type": "textfield",
+          "required": false,
+          "title": "Cline Config Path",
+          "label": "Cline Config Path",
+          "description": "Absolute path to the Cline MCP configuration file",
+          "default": "~/placeholder-cline.json"
+        },
+        {
+          "name": "showCodex",
+          "type": "checkbox",
+          "required": false,
+          "title": "Show Codex",
+          "label": "Show Codex",
+          "description": "Include Codex in the MCP list",
+          "default": true
+        },
+        {
+          "name": "codexPath",
+          "type": "textfield",
+          "required": false,
+          "title": "Codex Config Path",
+          "label": "Codex Config Path",
+          "description": "Absolute path to the Codex MCP configuration file",
+          "default": "~/placeholder-codex.json"
+        },
+        {
+          "name": "showCopilotCli",
+          "type": "checkbox",
+          "required": false,
+          "title": "Show Copilot CLI",
+          "label": "Show Copilot CLI",
+          "description": "Include Copilot CLI in the MCP list",
+          "default": true
+        },
+        {
+          "name": "copilotCliPath",
+          "type": "textfield",
+          "required": false,
+          "title": "Copilot CLI Config Path",
+          "label": "Copilot CLI Config Path",
+          "description": "Absolute path to the Copilot CLI MCP configuration file",
+          "default": "~/placeholder-copilot-cli.json"
+        },
+        {
+          "name": "showCopilotVscode",
+          "type": "checkbox",
+          "required": false,
+          "title": "Show Copilot / VS Code",
+          "label": "Show Copilot / VS Code",
+          "description": "Include Copilot / VS Code in the MCP list",
+          "default": true
+        },
+        {
+          "name": "copilotVscodePath",
+          "type": "textfield",
+          "required": false,
+          "title": "Copilot / VS Code Config Path",
+          "label": "Copilot / VS Code Config Path",
+          "description": "Absolute path to the Copilot / VS Code MCP configuration file",
+          "default": "~/placeholder-copilot-vscode.json"
+        },
+        {
+          "name": "showCursor",
+          "type": "checkbox",
+          "required": false,
+          "title": "Show Cursor",
+          "label": "Show Cursor",
+          "description": "Include Cursor in the MCP list",
+          "default": true
+        },
+        {
+          "name": "cursorPath",
+          "type": "textfield",
+          "required": false,
+          "title": "Cursor Config Path",
+          "label": "Cursor Config Path",
+          "description": "Absolute path to the Cursor MCP configuration file",
+          "default": "~/.cursor/mcp.json"
+        },
+        {
+          "name": "showFactoryCli",
+          "type": "checkbox",
+          "required": false,
+          "title": "Show Factory CLI",
+          "label": "Show Factory CLI",
+          "description": "Include Factory CLI in the MCP list",
+          "default": true
+        },
+        {
+          "name": "factoryCliPath",
+          "type": "textfield",
+          "required": false,
+          "title": "Factory CLI Config Path",
+          "label": "Factory CLI Config Path",
+          "description": "Absolute path to the Factory CLI MCP configuration file",
+          "default": "~/placeholder-factory-cli.json"
+        },
+        {
+          "name": "showGeminiCli",
+          "type": "checkbox",
+          "required": false,
+          "title": "Show Gemini CLI",
+          "label": "Show Gemini CLI",
+          "description": "Include Gemini CLI in the MCP list",
+          "default": true
+        },
+        {
+          "name": "geminiCliPath",
+          "type": "textfield",
+          "required": false,
+          "title": "Gemini CLI Config Path",
+          "label": "Gemini CLI Config Path",
+          "description": "Absolute path to the Gemini CLI MCP configuration file",
+          "default": "~/placeholder-gemini-cli.json"
+        },
+        {
+          "name": "showGeminiCodeAssist",
+          "type": "checkbox",
+          "required": false,
+          "title": "Show Gemini Code Assist",
+          "label": "Show Gemini Code Assist",
+          "description": "Include Gemini Code Assist in the MCP list",
+          "default": true
+        },
+        {
+          "name": "geminiCodeAssistPath",
+          "type": "textfield",
+          "required": false,
+          "title": "Gemini Code Assist Config Path",
+          "label": "Gemini Code Assist Config Path",
+          "description": "Absolute path to the Gemini Code Assist MCP configuration file",
+          "default": "~/placeholder-gemini-code-assist.json"
+        },
+        {
+          "name": "showJetbrains",
+          "type": "checkbox",
+          "required": false,
+          "title": "Show JetBrains AI Assistant & Junie",
+          "label": "Show JetBrains AI Assistant & Junie",
+          "description": "Include JetBrains AI Assistant & Junie in the MCP list",
+          "default": true
+        },
+        {
+          "name": "jetbrainsPath",
+          "type": "textfield",
+          "required": false,
+          "title": "JetBrains AI Assistant & Junie Config Path",
+          "label": "JetBrains AI Assistant & Junie Config Path",
+          "description": "Absolute path to the JetBrains AI Assistant & Junie MCP configuration file",
+          "default": "~/placeholder-jetbrains.json"
+        },
+        {
+          "name": "showKiro",
+          "type": "checkbox",
+          "required": false,
+          "title": "Show Kiro",
+          "label": "Show Kiro",
+          "description": "Include Kiro in the MCP list",
+          "default": true
+        },
+        {
+          "name": "kiroPath",
+          "type": "textfield",
+          "required": false,
+          "title": "Kiro Config Path",
+          "label": "Kiro Config Path",
+          "description": "Absolute path to the Kiro MCP configuration file",
+          "default": "~/placeholder-kiro.json"
+        },
+        {
+          "name": "showQoder",
+          "type": "checkbox",
+          "required": false,
+          "title": "Show Qoder",
+          "label": "Show Qoder",
+          "description": "Include Qoder in the MCP list",
+          "default": true
+        },
+        {
+          "name": "qoderPath",
+          "type": "textfield",
+          "required": false,
+          "title": "Qoder Config Path",
+          "label": "Qoder Config Path",
+          "description": "Absolute path to the Qoder MCP configuration file",
+          "default": "~/placeholder-qoder.json"
+        },
+        {
+          "name": "showVisualStudio",
+          "type": "checkbox",
+          "required": false,
+          "title": "Show Visual Studio",
+          "label": "Show Visual Studio",
+          "description": "Include Visual Studio in the MCP list",
+          "default": true
+        },
+        {
+          "name": "visualStudioPath",
+          "type": "textfield",
+          "required": false,
+          "title": "Visual Studio Config Path",
+          "label": "Visual Studio Config Path",
+          "description": "Absolute path to the Visual Studio MCP configuration file",
+          "default": "~/placeholder-visual-studio.json"
+        },
+        {
+          "name": "showWarp",
+          "type": "checkbox",
+          "required": false,
+          "title": "Show Warp",
+          "label": "Show Warp",
+          "description": "Include Warp in the MCP list",
+          "default": true
+        },
+        {
+          "name": "warpPath",
+          "type": "textfield",
+          "required": false,
+          "title": "Warp Config Path",
+          "label": "Warp Config Path",
+          "description": "Absolute path to the Warp MCP configuration file",
+          "default": "~/placeholder-warp.json"
+        },
+        {
+          "name": "showWindsurf",
+          "type": "checkbox",
+          "required": false,
+          "title": "Show Windsurf",
+          "label": "Show Windsurf",
+          "description": "Include Windsurf in the MCP list",
+          "default": true
+        },
+        {
+          "name": "windsurfPath",
+          "type": "textfield",
+          "required": false,
+          "title": "Windsurf Config Path",
+          "label": "Windsurf Config Path",
+          "description": "Absolute path to the Windsurf MCP configuration file",
+          "default": "~/placeholder-windsurf.json"
+        }
+      ]
+    }
+  ],
+  "dependencies": {
+    "@raycast/api": "^1.103.6",
+    "@raycast/utils": "^1.17.0"
+  },
+  "devDependencies": {
+    "@raycast/eslint-config": "^2.0.4",
+    "@types/node": "22.13.10",
+    "@types/react": "19.0.10",
+    "eslint": "^9.22.0",
+    "prettier": "^3.5.3",
+    "typescript": "^5.8.2"
+  },
+  "scripts": {
+    "build": "ray build",
+    "dev": "ray develop",
+    "fix-lint": "ray lint --fix",
+    "lint": "ray lint",
+    "prepublishOnly": "echo \"\\n\\nIt seems like you are trying to publish the Raycast extension to npm.\\n\\nIf you did intend to publish it to npm, remove the \\`prepublishOnly\\` script and rerun \\`npm publish\\` again.\\nIf you wanted to publish it to the Raycast Store instead, use \\`npm run publish\\` instead.\\n\\n\" && exit 1",
+    "publish": "npx @raycast/api@latest publish"
+  }
+}
