@@ -45,8 +45,7 @@ const MCP_CLIENTS: MCPClient[] = [
     id: "claude-desktop-app",
     name: "Claude Desktop",
     icon: Icon.Code,
-    docUrl:
-      "https://support.claude.com/en/articles/10949351-getting-started-with-local-mcp-servers-on-claude-desktop",
+    docUrl: "https://support.claude.com/en/articles/10949351-getting-started-with-local-mcp-servers-on-claude-desktop",
   },
   {
     id: "cline",
@@ -65,8 +64,7 @@ const MCP_CLIENTS: MCPClient[] = [
     id: "copilot-vscode",
     name: "Copilot / VS Code",
     icon: Icon.Code,
-    docUrl:
-      "https://code.visualstudio.com/docs/copilot/customization/mcp-servers",
+    docUrl: "https://code.visualstudio.com/docs/copilot/customization/mcp-servers",
   },
   {
     id: "cursor",
@@ -199,9 +197,7 @@ async function openInSublime(client: MCPClientWithPath) {
 
 function ensureConfiguredPath(client: MCPClientWithPath): string {
   if (!client.filePath) {
-    throw new Error(
-      `Set the config path for ${client.name} in extension preferences.`,
-    );
+    throw new Error(`Set the config path for ${client.name} in extension preferences.`);
   }
 
   if (client.expandedPath) {
@@ -224,54 +220,24 @@ function getDefaultAction(client: MCPClientWithPath, preferences: Preferences) {
   const defaultEditor = String(preferences.defaultEditor || "cursor").toLowerCase();
 
   if (defaultEditor === "cursor" && preferences.showCursorAction !== false) {
-    return (
-      <Action
-        title="Open in Cursor"
-        icon={Icon.Code}
-        onAction={() => openInCursor(client)}
-      />
-    );
+    return <Action title="Open in Cursor" icon={Icon.Code} onAction={() => openInCursor(client)} />;
   }
 
   if (defaultEditor === "vscode" && preferences.showVsCodeAction !== false) {
-    return (
-      <Action
-        title="Open in VS Code"
-        icon={Icon.Code}
-        onAction={() => openInVSCode(client)}
-      />
-    );
+    return <Action title="Open in VS Code" icon={Icon.Code} onAction={() => openInVSCode(client)} />;
   }
 
   if (defaultEditor === "zed" && preferences.showZedAction !== false) {
-    return (
-      <Action
-        title="Open in Zed"
-        icon={Icon.Code}
-        onAction={() => openInZed(client)}
-      />
-    );
+    return <Action title="Open in Zed" icon={Icon.Code} onAction={() => openInZed(client)} />;
   }
 
   if (defaultEditor === "sublime" && preferences.showSublimeAction !== false) {
-    return (
-      <Action
-        title="Open in Sublime Text"
-        icon={Icon.Code}
-        onAction={() => openInSublime(client)}
-      />
-    );
+    return <Action title="Open in Sublime Text" icon={Icon.Code} onAction={() => openInSublime(client)} />;
   }
 
   // Fallback to Cursor if default editor is not available
   if (preferences.showCursorAction !== false) {
-    return (
-      <Action
-        title="Open in Cursor"
-        icon={Icon.Code}
-        onAction={() => openInCursor(client)}
-      />
-    );
+    return <Action title="Open in Cursor" icon={Icon.Code} onAction={() => openInCursor(client)} />;
   }
 
   return null;
@@ -328,10 +294,7 @@ export default function Command() {
                         content={client.filePath}
                         shortcut={{ modifiers: ["cmd"], key: "c" }}
                       />
-                      <Action.ShowInFinder
-                        path={client.expandedPath}
-                        shortcut={{ modifiers: ["cmd"], key: "f" }}
-                      />
+                      <Action.ShowInFinder path={client.expandedPath} shortcut={{ modifiers: ["cmd"], key: "f" }} />
                     </>
                   ) : (
                     <Action
