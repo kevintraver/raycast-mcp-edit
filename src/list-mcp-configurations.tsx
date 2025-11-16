@@ -281,7 +281,7 @@ export default function Command() {
                 {defaultAction}
                 {client.docUrl && (
                   <Action.OpenInBrowser
-                    title={`Open ${client.name} MCP Documentation`}
+                    title="Open Documentation"
                     icon={Icon.Book}
                     url={client.docUrl}
                   />
