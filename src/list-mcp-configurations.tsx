@@ -9,10 +9,10 @@ import {
   closeMainWindow,
   openCommandPreferences,
 } from "@raycast/api";
-import { exec } from "child_process";
-import { promisify } from "util";
-import { homedir } from "os";
-import { resolve } from "path";
+import { exec } from "node:child_process";
+import { promisify } from "node:util";
+import { homedir } from "node:os";
+import { resolve } from "node:path";
 
 const execAsync = promisify(exec);
 
