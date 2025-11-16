@@ -217,6 +217,64 @@ interface Preferences {
   showVsCodeAction?: boolean;
   showZedAction?: boolean;
   showSublimeAction?: boolean;
+  defaultEditor?: string;
+}
+
+function getDefaultAction(client: MCPClientWithPath, preferences: Preferences) {
+  const defaultEditor = String(preferences.defaultEditor || "cursor").toLowerCase();
+
+  if (defaultEditor === "cursor" && preferences.showCursorAction !== false) {
+    return (
+      <Action
+        title="Open in Cursor"
+        icon={Icon.Code}
+        onAction={() => openInCursor(client)}
+      />
+    );
+  }
+
+  if (defaultEditor === "vscode" && preferences.showVsCodeAction !== false) {
+    return (
+      <Action
+        title="Open in VS Code"
+        icon={Icon.Code}
+        onAction={() => openInVSCode(client)}
+      />
+    );
+  }
+
+  if (defaultEditor === "zed" && preferences.showZedAction !== false) {
+    return (
+      <Action
+        title="Open in Zed"
+        icon={Icon.Code}
+        onAction={() => openInZed(client)}
+      />
+    );
+  }
+
+  if (defaultEditor === "sublime" && preferences.showSublimeAction !== false) {
+    return (
+      <Action
+        title="Open in Sublime Text"
+        icon={Icon.Code}
+        onAction={() => openInSublime(client)}
+      />
+    );
+  }
+
+  // Fallback to Cursor if default editor is not available
+  if (preferences.showCursorAction !== false) {
+    return (
+      <Action
+        title="Open in Cursor"
+        icon={Icon.Code}
+        onAction={() => openInCursor(client)}
+      />
+    );
+  }
+
+  return null;
 }
 
 export default function Command() {
@@ -244,80 +302,85 @@ export default function Command() {
 
   return (
     <List searchBarPlaceholder="Search MCP configurations...">
-      {clientsWithPaths.map((client) => (
-        <List.Item
-          key={client.id}
-          icon={client.icon}
-          title={client.name}
-          subtitle={client.filePath || "Set path in extension preferences"}
-          actions={
-            <ActionPanel>
-              {preferences.showCursorAction !== false && (
-                <Action
-                  title="Open in Cursor"
-                  icon={Icon.Code}
-                  onAction={() => openInCursor(client)}
-                />
-              )}
-              {client.docUrl && (
-                <Action.OpenInBrowser
-                  title="Open Documentation"
-                  icon={Icon.Book}
-                  url={client.docUrl}
-                />
-              )}
-              <ActionPanel.Section title="File Actions">
-                {client.expandedPath ? (
-                  <>
-                    <Action.CopyToClipboard
-                      title="Copy File Path"
-                      content={client.filePath}
+      {clientsWithPaths.map((client) => {
+        const defaultAction = getDefaultAction(client, preferences);
+        return (
+          <List.Item
+            key={client.id}
+            icon={client.icon}
+            title={client.name}
+            subtitle={client.filePath || "Set path in extension preferences"}
+            actions={
+              <ActionPanel>
+                {defaultAction}
+                {client.docUrl && (
+                  <Action.OpenInBrowser
+                    title="Open Documentation"
+                    icon={Icon.Book}
+                    url={client.docUrl}
+                  />
+                )}
+                <ActionPanel.Section title="File Actions">
+                  {client.expandedPath ? (
+                    <>
+                      <Action.CopyToClipboard
+                        title="Copy File Path"
+                        content={client.filePath}
+                        shortcut={{ modifiers: ["cmd"], key: "c" }}
+                      />
+                      <Action.ShowInFinder
+                        path={client.expandedPath}
+                        shortcut={{ modifiers: ["cmd"], key: "f" }}
+                      />
+                    </>
+                  ) : (
+                    <Action
+                      title="Set Config Path in Extension Preferences…"
+                      icon={Icon.Gear}
+                      shortcut={{ modifiers: ["cmd", "shift"], key: "p" }}
+                      onAction={() => openCommandPreferences()}
+                    />
+                  )}
+                </ActionPanel.Section>
+                <ActionPanel.Section title="Open in Editor">
+                  {preferences.showCursorAction !== false && (
+                    <Action
+                      title="Open in Cursor"
+                      icon={Icon.Code}
                       shortcut={{ modifiers: ["cmd"], key: "c" }}
+                      onAction={() => openInCursor(client)}
                     />
-                    <Action.ShowInFinder
-                      path={client.expandedPath}
-                      shortcut={{ modifiers: ["cmd"], key: "f" }}
+                  )}
+                  {preferences.showVsCodeAction !== false && (
+                    <Action
+                      title="Open in VS Code"
+                      icon={Icon.Code}
+                      shortcut={{ modifiers: ["cmd"], key: "v" }}
+                      onAction={() => openInVSCode(client)}
                     />
-                  </>
-                ) : (
-                  <Action
-                    title="Set Config Path in Extension Preferences…"
-                    icon={Icon.Gear}
-                    shortcut={{ modifiers: ["cmd", "shift"], key: "p" }}
-                    onAction={() => openCommandPreferences()}
-                  />
-                )}
-              </ActionPanel.Section>
-              <ActionPanel.Section title="Open in Editor">
-                {preferences.showVsCodeAction !== false && (
-                  <Action
-                    title="Open in VS Code"
-                    icon={Icon.Code}
-                    shortcut={{ modifiers: ["cmd"], key: "v" }}
-                    onAction={() => openInVSCode(client)}
-                  />
-                )}
-                {preferences.showZedAction !== false && (
-                  <Action
-                    title="Open in Zed"
-                    icon={Icon.Code}
-                    shortcut={{ modifiers: ["cmd"], key: "z" }}
-                    onAction={() => openInZed(client)}
-                  />
-                )}
-                {preferences.showSublimeAction !== false && (
-                  <Action
-                    title="Open in Sublime Text"
-                    icon={Icon.Code}
-                    shortcut={{ modifiers: ["cmd"], key: "s" }}
-                    onAction={() => openInSublime(client)}
-                  />
-                )}
-              </ActionPanel.Section>
-            </ActionPanel>
-          }
-        />
-      ))}
+                  )}
+                  {preferences.showZedAction !== false && (
+                    <Action
+                      title="Open in Zed"
+                      icon={Icon.Code}
+                      shortcut={{ modifiers: ["cmd"], key: "z" }}
+                      onAction={() => openInZed(client)}
+                    />
+                  )}
+                  {preferences.showSublimeAction !== false && (
+                    <Action
+                      title="Open in Sublime Text"
+                      icon={Icon.Code}
+                      shortcut={{ modifiers: ["cmd"], key: "s" }}
+                      onAction={() => openInSublime(client)}
+                    />
+                  )}
+                </ActionPanel.Section>
+              </ActionPanel>
+            }
+          />
+        );
+      })}
     </List>
   );
 }
