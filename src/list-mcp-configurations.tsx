@@ -335,7 +335,7 @@ export default function Command() {
                     </>
                   ) : (
                     <Action
-                      title="Set Config Path in Extension Preferences…"
+                      title="Set Path"
                       icon={Icon.Gear}
                       shortcut={{ modifiers: ["cmd", "shift"], key: "p" }}
                       onAction={() => openCommandPreferences()}
