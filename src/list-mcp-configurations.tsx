@@ -44,13 +44,13 @@ const MCP_CLIENTS: MCPClient[] = [
   {
     id: "claude-desktop-app",
     name: "Claude Desktop",
-    icon: Icon.Code,
+    icon: Icon.AppWindow,
     docUrl: "https://support.claude.com/en/articles/10949351-getting-started-with-local-mcp-servers-on-claude-desktop",
   },
   {
     id: "cline",
     name: "Cline",
-    icon: Icon.Code,
+    icon: Icon.AppWindow,
     docUrl: "https://docs.cline.bot/mcp/configuring-mcp-servers",
   },
   {
@@ -63,13 +63,13 @@ const MCP_CLIENTS: MCPClient[] = [
   {
     id: "copilot-vscode",
     name: "Copilot / VS Code",
-    icon: Icon.Code,
+    icon: Icon.AppWindow,
     docUrl: "https://code.visualstudio.com/docs/copilot/customization/mcp-servers",
   },
   {
     id: "cursor",
     name: "Cursor",
-    icon: Icon.Code,
+    icon: Icon.AppWindow,
     docUrl: "https://cursor.com/docs/context/mcp",
   },
   {
@@ -87,31 +87,31 @@ const MCP_CLIENTS: MCPClient[] = [
   {
     id: "jetbrains",
     name: "JetBrains AI Assistant",
-    icon: Icon.Code,
+    icon: Icon.AppWindow,
     docUrl: "https://www.jetbrains.com/help/ai-assistant/mcp.html",
   },
   {
     id: "kiro",
     name: "Kiro",
-    icon: Icon.Code,
+    icon: Icon.AppWindow,
     docUrl: "https://kiro.dev/docs/mcp/configuration/",
   },
   {
     id: "qoder",
     name: "Qoder",
-    icon: Icon.Code,
+    icon: Icon.AppWindow,
     docUrl: "https://docs.qoder.com/user-guide/chat/model-context-protocol",
   },
   {
     id: "visual-studio",
     name: "Visual Studio",
-    icon: Icon.Code,
+    icon: Icon.AppWindow,
     docUrl: "https://learn.microsoft.com/en-us/visualstudio/ide/mcp-servers",
   },
   {
     id: "windsurf",
     name: "Windsurf",
-    icon: Icon.Code,
+    icon: Icon.AppWindow,
     docUrl: "https://docs.windsurf.com/windsurf/cascade/mcp",
   },
 ];
@@ -220,24 +220,24 @@ function getDefaultAction(client: MCPClientWithPath, preferences: Preferences) {
   const defaultEditor = String(preferences.defaultEditor || "cursor").toLowerCase();
 
   if (defaultEditor === "cursor" && preferences.showCursorAction !== false) {
-    return <Action title="Open in Cursor" icon={Icon.Code} onAction={() => openInCursor(client)} />;
+    return <Action title="Open in Cursor" icon={Icon.AppWindow} onAction={() => openInCursor(client)} />;
   }
 
   if (defaultEditor === "vscode" && preferences.showVsCodeAction !== false) {
-    return <Action title="Open in VS Code" icon={Icon.Code} onAction={() => openInVSCode(client)} />;
+    return <Action title="Open in VS Code" icon={Icon.AppWindow} onAction={() => openInVSCode(client)} />;
   }
 
   if (defaultEditor === "zed" && preferences.showZedAction !== false) {
-    return <Action title="Open in Zed" icon={Icon.Code} onAction={() => openInZed(client)} />;
+    return <Action title="Open in Zed" icon={Icon.AppWindow} onAction={() => openInZed(client)} />;
   }
 
   if (defaultEditor === "sublime" && preferences.showSublimeAction !== false) {
-    return <Action title="Open in Sublime Text" icon={Icon.Code} onAction={() => openInSublime(client)} />;
+    return <Action title="Open in Sublime Text" icon={Icon.AppWindow} onAction={() => openInSublime(client)} />;
   }
 
   // Fallback to Cursor if default editor is not available
   if (preferences.showCursorAction !== false) {
-    return <Action title="Open in Cursor" icon={Icon.Code} onAction={() => openInCursor(client)} />;
+    return <Action title="Open in Cursor" icon={Icon.AppWindow} onAction={() => openInCursor(client)} />;
   }
 
   return null;
@@ -309,7 +309,7 @@ export default function Command() {
                   {preferences.showCursorAction !== false && (
                     <Action
                       title="Open in Cursor"
-                      icon={Icon.Code}
+                      icon={Icon.AppWindow}
                       shortcut={{ modifiers: ["cmd"], key: "c" }}
                       onAction={() => openInCursor(client)}
                     />
@@ -317,7 +317,7 @@ export default function Command() {
                   {preferences.showVsCodeAction !== false && (
                     <Action
                       title="Open in VS Code"
-                      icon={Icon.Code}
+                      icon={Icon.AppWindow}
                       shortcut={{ modifiers: ["cmd"], key: "v" }}
                       onAction={() => openInVSCode(client)}
                     />
@@ -325,7 +325,7 @@ export default function Command() {
                   {preferences.showZedAction !== false && (
                     <Action
                       title="Open in Zed"
-                      icon={Icon.Code}
+                      icon={Icon.AppWindow}
                       shortcut={{ modifiers: ["cmd"], key: "z" }}
                       onAction={() => openInZed(client)}
                     />
@@ -333,7 +333,7 @@ export default function Command() {
                   {preferences.showSublimeAction !== false && (
                     <Action
                       title="Open in Sublime Text"
-                      icon={Icon.Code}
+                      icon={Icon.AppWindow}
                       shortcut={{ modifiers: ["cmd"], key: "s" }}
                       onAction={() => openInSublime(client)}
                     />
