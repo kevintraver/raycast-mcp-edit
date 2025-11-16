@@ -266,18 +266,18 @@
           "name": "showJetbrains",
           "type": "checkbox",
           "required": false,
-          "title": "JetBrains AI Assistant & Junie",
+          "title": "JetBrains AI Assistant",
           "label": "Enabled",
-          "description": "Include JetBrains AI Assistant & Junie in the MCP list",
+          "description": "Include JetBrains AI Assistant in the MCP list",
           "default": true
         },
         {
           "name": "jetbrainsPath",
           "type": "textfield",
           "required": false,
-          "title": "JetBrains AI Assistant & Junie Config Path",
-          "label": "JetBrains AI Assistant & Junie Config Path",
-          "description": "Absolute path to the JetBrains AI Assistant & Junie MCP configuration file",
+          "title": "JetBrains AI Assistant Config Path",
+          "label": "JetBrains AI Assistant Config Path",
+          "description": "Absolute path to the JetBrains AI Assistant MCP configuration file",
           "default": "~/Library/Application Support/JetBrains/IntelliJIdea2025.2/options/llm.mcpServers.xml"
         },
         {
