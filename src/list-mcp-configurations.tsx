@@ -20,6 +20,7 @@ interface MCPClient {
   id: string;
   name: string;
   icon: Icon;
+  docUrl?: string;
 }
 
 type MCPClientWithPath = MCPClient & {
@@ -28,21 +29,93 @@ type MCPClientWithPath = MCPClient & {
 };
 
 const MCP_CLIENTS: MCPClient[] = [
-  { id: "amp", name: "Amp", icon: Icon.Code },
-  { id: "claude-code", name: "Claude Code", icon: Icon.Code },
-  { id: "claude-desktop-app", name: "Claude Desktop app", icon: Icon.Code },
-  { id: "cline", name: "Cline", icon: Icon.Code },
-  { id: "codex", name: "Codex", icon: Icon.Code },
+  {
+    id: "amp",
+    name: "Amp",
+    icon: Icon.Code,
+    docUrl: "https://ampcode.com/manual#mcp",
+  },
+  {
+    id: "claude-code",
+    name: "Claude Code",
+    icon: Icon.Code,
+    docUrl: "https://code.claude.com/docs/en/mcp",
+  },
+  {
+    id: "claude-desktop-app",
+    name: "Claude Desktop app",
+    icon: Icon.Code,
+    docUrl:
+      "https://support.claude.com/en/articles/10949351-getting-started-with-local-mcp-servers-on-claude-desktop",
+  },
+  {
+    id: "cline",
+    name: "Cline",
+    icon: Icon.Code,
+    docUrl: "https://docs.cline.bot/mcp/configuring-mcp-servers",
+  },
+  {
+    id: "codex",
+    name: "Codex",
+    icon: Icon.Code,
+    docUrl: "https://developers.openai.com/codex/mcp/",
+  },
   { id: "copilot-cli", name: "Copilot CLI", icon: Icon.Terminal },
-  { id: "copilot-vscode", name: "Copilot / VS Code", icon: Icon.Code },
-  { id: "cursor", name: "Cursor", icon: Icon.Code },
-  { id: "factory-cli", name: "Factory CLI", icon: Icon.Terminal },
-  { id: "gemini-cli", name: "Gemini CLI", icon: Icon.Terminal },
-  { id: "jetbrains", name: "JetBrains AI Assistant & Junie", icon: Icon.Code },
-  { id: "kiro", name: "Kiro", icon: Icon.Code },
-  { id: "qoder", name: "Qoder", icon: Icon.Code },
-  { id: "visual-studio", name: "Visual Studio", icon: Icon.Code },
-  { id: "windsurf", name: "Windsurf", icon: Icon.Code },
+  {
+    id: "copilot-vscode",
+    name: "Copilot / VS Code",
+    icon: Icon.Code,
+    docUrl:
+      "https://code.visualstudio.com/docs/copilot/customization/mcp-servers",
+  },
+  {
+    id: "cursor",
+    name: "Cursor",
+    icon: Icon.Code,
+    docUrl: "https://cursor.com/docs/context/mcp",
+  },
+  {
+    id: "factory-cli",
+    name: "Factory CLI",
+    icon: Icon.Terminal,
+    docUrl: "https://docs.factory.ai/cli/configuration/mcp",
+  },
+  {
+    id: "gemini-cli",
+    name: "Gemini CLI",
+    icon: Icon.Terminal,
+    docUrl: "https://geminicli.com/docs/tools/mcp-server/",
+  },
+  {
+    id: "jetbrains",
+    name: "JetBrains AI Assistant",
+    icon: Icon.Code,
+    docUrl: "https://www.jetbrains.com/help/ai-assistant/mcp.html",
+  },
+  {
+    id: "kiro",
+    name: "Kiro",
+    icon: Icon.Code,
+    docUrl: "https://kiro.dev/docs/mcp/configuration/",
+  },
+  {
+    id: "qoder",
+    name: "Qoder",
+    icon: Icon.Code,
+    docUrl: "https://docs.qoder.com/user-guide/chat/model-context-protocol",
+  },
+  {
+    id: "visual-studio",
+    name: "Visual Studio",
+    icon: Icon.Code,
+    docUrl: "https://learn.microsoft.com/en-us/visualstudio/ide/mcp-servers",
+  },
+  {
+    id: "windsurf",
+    name: "Windsurf",
+    icon: Icon.Code,
+    docUrl: "https://docs.windsurf.com/windsurf/cascade/mcp",
+  },
 ];
 
 function expandPath(filePath: string): string {
@@ -126,7 +199,9 @@ async function openInSublime(client: MCPClientWithPath) {
 
 function ensureConfiguredPath(client: MCPClientWithPath): string {
   if (!client.filePath) {
-    throw new Error(`Set the config path for ${client.name} in command preferences.`);
+    throw new Error(
+      `Set the config path for ${client.name} in command preferences.`,
+    );
   }
 
   if (client.expandedPath) {
@@ -178,8 +253,41 @@ export default function Command() {
           actions={
             <ActionPanel>
               {preferences.showCursorAction !== false && (
-                <Action title="Open in Cursor" icon={Icon.Code} onAction={() => openInCursor(client)} />
+                <Action
+                  title="Open in Cursor"
+                  icon={Icon.Code}
+                  onAction={() => openInCursor(client)}
+                />
               )}
+              {client.docUrl && (
+                <Action.OpenInBrowser
+                  title="Open Documentation"
+                  icon={Icon.Book}
+                  url={client.docUrl}
+                />
+              )}
+              <ActionPanel.Section title="File Actions">
+                {client.expandedPath ? (
+                  <>
+                    <Action.CopyToClipboard
+                      title="Copy File Path"
+                      content={client.filePath}
+                      shortcut={{ modifiers: ["cmd"], key: "c" }}
+                    />
+                    <Action.ShowInFinder
+                      path={client.expandedPath}
+                      shortcut={{ modifiers: ["cmd"], key: "f" }}
+                    />
+                  </>
+                ) : (
+                  <Action
+                    title="Set Config Path…"
+                    icon={Icon.Gear}
+                    shortcut={{ modifiers: ["cmd", "shift"], key: "p" }}
+                    onAction={() => openCommandPreferences()}
+                  />
+                )}
+              </ActionPanel.Section>
               <ActionPanel.Section title="Open in Editor">
                 {preferences.showVsCodeAction !== false && (
                   <Action
@@ -203,25 +311,6 @@ export default function Command() {
                     icon={Icon.Code}
                     shortcut={{ modifiers: ["cmd"], key: "s" }}
                     onAction={() => openInSublime(client)}
-                  />
-                )}
-              </ActionPanel.Section>
-              <ActionPanel.Section title="File Actions">
-                {client.expandedPath ? (
-                  <>
-                    <Action.CopyToClipboard
-                      title="Copy File Path"
-                      content={client.filePath}
-                      shortcut={{ modifiers: ["cmd"], key: "c" }}
-                    />
-                    <Action.ShowInFinder path={client.expandedPath} shortcut={{ modifiers: ["cmd"], key: "f" }} />
-                  </>
-                ) : (
-                  <Action
-                    title="Set Config Path…"
-                    icon={Icon.Gear}
-                    shortcut={{ modifiers: ["cmd", "shift"], key: "p" }}
-                    onAction={() => openCommandPreferences()}
                   />
                 )}
               </ActionPanel.Section>
