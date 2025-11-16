@@ -22,11 +22,36 @@
       "mode": "view",
       "preferences": [
         {
+          "name": "defaultEditor",
+          "type": "dropdown",
+          "required": true,
+          "title": "Default Editor",
+          "description": "Select the default editor to use when opening MCP configuration files",
+          "data": [
+            {
+              "title": "Cursor",
+              "value": "cursor"
+            },
+            {
+              "title": "VS Code",
+              "value": "vscode"
+            },
+            {
+              "title": "Zed",
+              "value": "zed"
+            },
+            {
+              "title": "Sublime Text",
+              "value": "sublime"
+            }
+          ]
+        },
+        {
           "name": "showCursorAction",
           "type": "checkbox",
           "required": false,
-          "title": "Enable Open in Cursor",
-          "label": "Enable Open in Cursor",
+          "title": "Open in Cursor",
+          "label": "Enabled",
           "description": "Show the Cursor editor action in the list",
           "default": true
         },
@@ -34,8 +59,8 @@
           "name": "showVsCodeAction",
           "type": "checkbox",
           "required": false,
-          "title": "Enable Open in VS Code",
-          "label": "Enable Open in VS Code",
+          "title": "Open in VS Code",
+          "label": "Enabled",
           "description": "Show the VS Code editor action in the list",
           "default": true
         },
@@ -43,8 +68,8 @@
           "name": "showZedAction",
           "type": "checkbox",
           "required": false,
-          "title": "Enable Open in Zed",
-          "label": "Enable Open in Zed",
+          "title": "Open in Zed",
+          "label": "Enabled",
           "description": "Show the Zed editor action in the list",
           "default": true
         },
@@ -52,8 +77,8 @@
           "name": "showSublimeAction",
           "type": "checkbox",
           "required": false,
-          "title": "Enable Open in Sublime Text",
-          "label": "Enable Open in Sublime Text",
+          "title": "Open in Sublime Text",
+          "label": "Enabled",
           "description": "Show the Sublime Text editor action in the list",
           "default": true
         },
@@ -61,9 +86,9 @@
           "name": "showAmp",
           "type": "checkbox",
           "required": false,
-          "title": "Show Amp",
-          "label": "Show Amp",
-          "description": "Include Amp in the MCP list",
+          "title": "Amp Code",
+          "label": "Enabled",
+          "description": "Configure which MCP clients appear in the list and their configuration file paths",
           "default": true
         },
         {
@@ -79,8 +104,8 @@
           "name": "showClaudeCode",
           "type": "checkbox",
           "required": false,
-          "title": "Show Claude Code",
-          "label": "Show Claude Code",
+          "title": "Claude Code",
+          "label": "Enabled",
           "description": "Include Claude Code in the MCP list",
           "default": true
         },
@@ -97,8 +122,8 @@
           "name": "showClaudeDesktopApp",
           "type": "checkbox",
           "required": false,
-          "title": "Show Claude Desktop app",
-          "label": "Show Claude Desktop app",
+          "title": "Claude Desktop app",
+          "label": "Enabled",
           "description": "Include Claude Desktop app in the MCP list",
           "default": true
         },
@@ -115,8 +140,8 @@
           "name": "showCline",
           "type": "checkbox",
           "required": false,
-          "title": "Show Cline",
-          "label": "Show Cline",
+          "title": "Cline",
+          "label": "Enabled",
           "description": "Include Cline in the MCP list",
           "default": true
         },
@@ -133,8 +158,8 @@
           "name": "showCodex",
           "type": "checkbox",
           "required": false,
-          "title": "Show Codex",
-          "label": "Show Codex",
+          "title": "Codex",
+          "label": "Enabled",
           "description": "Include Codex in the MCP list",
           "default": true
         },
@@ -151,8 +176,8 @@
           "name": "showCopilotCli",
           "type": "checkbox",
           "required": false,
-          "title": "Show Copilot CLI",
-          "label": "Show Copilot CLI",
+          "title": "Copilot CLI",
+          "label": "Enabled",
           "description": "Include Copilot CLI in the MCP list",
           "default": true
         },
@@ -169,8 +194,8 @@
           "name": "showCopilotVscode",
           "type": "checkbox",
           "required": false,
-          "title": "Show Copilot / VS Code",
-          "label": "Show Copilot / VS Code",
+          "title": "Copilot / VS Code",
+          "label": "Enabled",
           "description": "Include Copilot / VS Code in the MCP list",
           "default": true
         },
@@ -187,8 +212,8 @@
           "name": "showCursor",
           "type": "checkbox",
           "required": false,
-          "title": "Show Cursor",
-          "label": "Show Cursor",
+          "title": "Cursor",
+          "label": "Enabled",
           "description": "Include Cursor in the MCP list",
           "default": true
         },
@@ -205,8 +230,8 @@
           "name": "showFactoryCli",
           "type": "checkbox",
           "required": false,
-          "title": "Show Factory CLI",
-          "label": "Show Factory CLI",
+          "title": "Factory CLI",
+          "label": "Enabled",
           "description": "Include Factory CLI in the MCP list",
           "default": true
         },
@@ -223,8 +248,8 @@
           "name": "showGeminiCli",
           "type": "checkbox",
           "required": false,
-          "title": "Show Gemini CLI",
-          "label": "Show Gemini CLI",
+          "title": "Gemini CLI",
+          "label": "Enabled",
           "description": "Include Gemini CLI in the MCP list",
           "default": true
         },
@@ -241,8 +266,8 @@
           "name": "showJetbrains",
           "type": "checkbox",
           "required": false,
-          "title": "Show JetBrains AI Assistant & Junie",
-          "label": "Show JetBrains AI Assistant & Junie",
+          "title": "JetBrains AI Assistant & Junie",
+          "label": "Enabled",
           "description": "Include JetBrains AI Assistant & Junie in the MCP list",
           "default": true
         },
@@ -259,8 +284,8 @@
           "name": "showKiro",
           "type": "checkbox",
           "required": false,
-          "title": "Show Kiro",
-          "label": "Show Kiro",
+          "title": "Kiro",
+          "label": "Enabled",
           "description": "Include Kiro in the MCP list",
           "default": true
         },
@@ -277,8 +302,8 @@
           "name": "showQoder",
           "type": "checkbox",
           "required": false,
-          "title": "Show Qoder",
-          "label": "Show Qoder",
+          "title": "Qoder",
+          "label": "Enabled",
           "description": "Include Qoder in the MCP list",
           "default": true
         },
@@ -295,8 +320,8 @@
           "name": "showVisualStudio",
           "type": "checkbox",
           "required": false,
-          "title": "Show Visual Studio",
-          "label": "Show Visual Studio",
+          "title": "Visual Studio",
+          "label": "Enabled",
           "description": "Include Visual Studio in the MCP list",
           "default": true
         },
@@ -313,8 +338,8 @@
           "name": "showWindsurf",
           "type": "checkbox",
           "required": false,
-          "title": "Show Windsurf",
-          "label": "Show Windsurf",
+          "title": "Windsurf",
+          "label": "Enabled",
           "description": "Include Windsurf in the MCP list",
           "default": true
         },
