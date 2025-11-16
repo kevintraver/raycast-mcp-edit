@@ -238,24 +238,6 @@
           "default": ""
         },
         {
-          "name": "showGeminiCodeAssist",
-          "type": "checkbox",
-          "required": false,
-          "title": "Show Gemini Code Assist",
-          "label": "Show Gemini Code Assist",
-          "description": "Include Gemini Code Assist in the MCP list",
-          "default": true
-        },
-        {
-          "name": "geminiCodeAssistPath",
-          "type": "textfield",
-          "required": false,
-          "title": "Gemini Code Assist Config Path",
-          "label": "Gemini Code Assist Config Path",
-          "description": "Absolute path to the Gemini Code Assist MCP configuration file",
-          "default": ""
-        },
-        {
           "name": "showJetbrains",
           "type": "checkbox",
           "required": false,
