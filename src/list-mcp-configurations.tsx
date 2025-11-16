@@ -32,13 +32,13 @@ const MCP_CLIENTS: MCPClient[] = [
   {
     id: "amp",
     name: "Amp",
-    icon: Icon.Code,
+    icon: Icon.Terminal,
     docUrl: "https://ampcode.com/manual#mcp",
   },
   {
     id: "claude-code",
     name: "Claude Code",
-    icon: Icon.Code,
+    icon: Icon.Terminal,
     docUrl: "https://code.claude.com/docs/en/mcp",
   },
   {
@@ -56,7 +56,7 @@ const MCP_CLIENTS: MCPClient[] = [
   {
     id: "codex",
     name: "Codex",
-    icon: Icon.Code,
+    icon: Icon.Terminal,
     docUrl: "https://developers.openai.com/codex/mcp/",
   },
   { id: "copilot-cli", name: "Copilot CLI", icon: Icon.Terminal },
