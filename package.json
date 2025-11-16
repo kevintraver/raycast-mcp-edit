@@ -227,6 +227,24 @@
           "default": "~/.cursor/mcp.json"
         },
         {
+          "name": "showCursorCli",
+          "type": "checkbox",
+          "required": false,
+          "title": "Cursor CLI",
+          "label": "Enabled",
+          "description": "Include Cursor CLI in the MCP list",
+          "default": true
+        },
+        {
+          "name": "cursorCliPath",
+          "type": "textfield",
+          "required": false,
+          "title": "Cursor CLI Config Path",
+          "label": "Cursor CLI Config Path",
+          "description": "Absolute path to the Cursor CLI MCP configuration file",
+          "default": "~/.cursor/mcp.json"
+        },
+        {
           "name": "showFactoryCli",
           "type": "checkbox",
           "required": false,

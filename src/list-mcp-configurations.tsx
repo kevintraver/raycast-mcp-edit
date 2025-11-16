@@ -73,6 +73,12 @@ const MCP_CLIENTS: MCPClient[] = [
     docUrl: "https://cursor.com/docs/context/mcp",
   },
   {
+    id: "cursor-cli",
+    name: "Cursor CLI",
+    icon: Icon.Terminal,
+    docUrl: "https://cursor.com/docs/context/mcp",
+  },
+  {
     id: "factory-cli",
     name: "Factory CLI",
     icon: Icon.Terminal,
