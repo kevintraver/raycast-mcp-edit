@@ -200,7 +200,7 @@ async function openInSublime(client: MCPClientWithPath) {
 function ensureConfiguredPath(client: MCPClientWithPath): string {
   if (!client.filePath) {
     throw new Error(
-      `Set the config path for ${client.name} in command preferences.`,
+      `Set the config path for ${client.name} in extension preferences.`,
     );
   }
 
@@ -249,7 +249,7 @@ export default function Command() {
           key={client.id}
           icon={client.icon}
           title={client.name}
-          subtitle={client.filePath || "Set path in command preferences"}
+          subtitle={client.filePath || "Set path in extension preferences"}
           actions={
             <ActionPanel>
               {preferences.showCursorAction !== false && (
@@ -281,7 +281,7 @@ export default function Command() {
                   </>
                 ) : (
                   <Action
-                    title="Set Config Path…"
+                    title="Set Config Path in Extension Preferences…"
                     icon={Icon.Gear}
                     shortcut={{ modifiers: ["cmd", "shift"], key: "p" }}
                     onAction={() => openCommandPreferences()}
