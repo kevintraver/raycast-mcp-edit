@@ -43,7 +43,7 @@ const MCP_CLIENTS: MCPClient[] = [
   },
   {
     id: "claude-desktop-app",
-    name: "Claude Desktop app",
+    name: "Claude Desktop",
     icon: Icon.Code,
     docUrl:
       "https://support.claude.com/en/articles/10949351-getting-started-with-local-mcp-servers-on-claude-desktop",

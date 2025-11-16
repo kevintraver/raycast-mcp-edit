@@ -122,18 +122,18 @@
           "name": "showClaudeDesktopApp",
           "type": "checkbox",
           "required": false,
-          "title": "Claude Desktop app",
+          "title": "Claude Desktop",
           "label": "Enabled",
-          "description": "Include Claude Desktop app in the MCP list",
+          "description": "Include Claude Desktop in the MCP list",
           "default": true
         },
         {
           "name": "claudeDesktopAppPath",
           "type": "textfield",
           "required": false,
-          "title": "Claude Desktop app Config Path",
-          "label": "Claude Desktop app Config Path",
-          "description": "Absolute path to the Claude Desktop app MCP configuration file",
+          "title": "Claude Desktop Config Path",
+          "label": "Claude Desktop Config Path",
+          "description": "Absolute path to the Claude Desktop MCP configuration file",
           "default": "~/Library/Application Support/Claude/claude_desktop_config.json"
         },
         {
