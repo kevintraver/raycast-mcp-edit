@@ -299,6 +299,24 @@
           "default": "~/Library/Application Support/JetBrains/IntelliJIdea2025.2/options/llm.mcpServers.xml"
         },
         {
+          "name": "showOpencode",
+          "type": "checkbox",
+          "required": false,
+          "title": "OpenCode",
+          "label": "Enabled",
+          "description": "Include OpenCode in the MCP list",
+          "default": true
+        },
+        {
+          "name": "opencodePath",
+          "type": "textfield",
+          "required": false,
+          "title": "OpenCode Config Path",
+          "label": "OpenCode Config Path",
+          "description": "Absolute path to the OpenCode MCP configuration file",
+          "default": "~/.config/opencode/opencode.json"
+        },
+        {
           "name": "showKiro",
           "type": "checkbox",
           "required": false,

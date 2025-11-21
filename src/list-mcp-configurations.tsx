@@ -97,6 +97,12 @@ const MCP_CLIENTS: MCPClient[] = [
     docUrl: "https://www.jetbrains.com/help/ai-assistant/mcp.html",
   },
   {
+    id: "opencode",
+    name: "OpenCode",
+    icon: Icon.Terminal,
+    docUrl: "https://opencode.ai/docs/mcp-servers",
+  },
+  {
     id: "kiro",
     name: "Kiro",
     icon: Icon.AppWindow,
@@ -286,11 +292,7 @@ export default function Command() {
               <ActionPanel>
                 {defaultAction}
                 {client.docUrl && (
-                  <Action.OpenInBrowser
-                    title="Open Documentation"
-                    icon={Icon.Book}
-                    url={client.docUrl}
-                  />
+                  <Action.OpenInBrowser title="Open Documentation" icon={Icon.Book} url={client.docUrl} />
                 )}
                 <ActionPanel.Section title="File Actions">
                   {client.expandedPath ? (
