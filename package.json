@@ -6,8 +6,7 @@
   "icon": "icon.png",
   "author": "kevintraver",
   "platforms": [
-    "macOS",
-    "Windows"
+    "macOS"
   ],
   "categories": [
     "Developer Tools"
@@ -17,7 +16,7 @@
     {
       "name": "list-mcp-configurations",
       "title": "Edit MCP Configurations",
-      "subtitle": "Edit MCP Configurations",
+      "subtitle": "MCP",
       "description": "Browse and open predefined MCP client configuration files",
       "mode": "view",
       "preferences": [
